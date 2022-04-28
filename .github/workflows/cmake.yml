@@ -33,9 +33,15 @@ jobs:
       working-directory: ${{github.workspace}}/build/${{env.BUILD_TYPE}}
       run: ${{github.workspace}}/build/${{env.BUILD_TYPE}}/MainProject.exe
       
-    - name: Upload output files to GitHub so they can be reviewed
+    - name: Upload
       uses: actions/upload-artifact@v2
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         name: project_output
         path: ${{github.workspace}}/build
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./${{ matrix.config.artifact }}
+        asset_name: ${{ matrix.config.artifact }}.zip
+        asset_content_type: application/zip
       

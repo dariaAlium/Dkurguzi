@@ -39,9 +39,5 @@ jobs:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         name: project_output
-        path: ${{github.workspace}}/build
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./${{ matrix.config.artifact }}
-        asset_name: ${{ matrix.config.artifact }}.zip
-        asset_content_type: application/zip
+        path: ${{github.workspace}}/build/${{env.BUILD_TYPE}}
       
